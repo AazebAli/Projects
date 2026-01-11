@@ -1,0 +1,1848 @@
+:root {
+    --blue: blue;
+    --black: black;
+    --light-color: grey;
+    --box-shadow: 0.5rem 0.5rem rgba(0,0,0,0.1);
+    --border: 2rem solid rgba(0,0,0,0.1);
+    --outline: 0.1rem solid rgba(0,0,0,0.1);
+}
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    text-decoration: none;
+    transition: 0.2s linear;
+}
+
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 7rem;
+    overflow-x: hidden;
+}
+
+body {
+    background: white;
+}
+
+header {
+    font-size: large;
+    border: 2px solid grey;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 5%;
+    background: #fff;
+    box-shadow: var(--box-shadow);
+    z-index: 1000;
+}
+
+.logo {
+    font-size: x-large;
+}
+
+nav {
+    font-size: 70%;
+    margin-right: 15%;
+    display: flex;
+    align-items: center;
+}
+
+nav a {
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 8px;
+    margin: 0 5px;
+}
+
+nav a:hover {
+    background-color: #eee
+}
+
+.language {
+    display: flex;
+    align-items: center;
+    padding: 11px;
+    border: 1px solid grey;
+    border-radius: 3px;
+}
+
+.language:hover {
+    background-color: grey;
+}
+
+.profile {
+    padding: 10px;
+    border: 1px solid grey;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+}
+
+.profile:hover {
+    background-color: grey;
+}
+
+.signup {
+    border: 1px solid rgb(66, 66, 252); 
+    background-color: rgb(66, 66, 252); 
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+}
+
+.signup:hover {
+    background-color: grey;
+}
+
+.search-form {
+    border: 1px solid black;
+    position: absolute;
+    right: -75%;
+    width: 660px;
+    height: 3rem;
+    text-align: center;
+    border-radius: 5px;
+    display: flex;
+    box-shadow: var(--box-shadow);
+    align-items: center;
+    transition: ease-in 0.001s;
+    background-color: white;
+}
+
+.search-form input {
+    height: 100%;
+    width: 100%;
+    background: none;
+    text-transform: none;
+    padding: 2%;
+}
+
+.search-form label {
+    text-align: center;
+    padding: 1rem;
+}
+
+.search-form.active {
+    right: 40%;
+}
+
+.banner {
+    
+    margin-top: 10rem;
+    padding: 5rem;
+    text-align:left;
+    background: #fff;
+}
+
+.banner .content {
+    margin-right: 0 auto;
+}
+
+.banner h2 {
+    font-size: 3.5rem;
+    margin-bottom: 2rem;
+    color: var(--blue);
+    margin-left: 4%;
+}
+
+.banner p {
+    width: 500px;
+    padding: 1.rem;
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    margin-left: 4%;
+}
+
+.banner .talk {
+    display: inline-block;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    background: var(--blue);
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    transition: 0.3s;
+    margin-left: 4%;
+}
+
+.banner .talk:hover {
+    background: var(--light-color);
+}
+.banner p3
+{
+    position: absolute;
+    right: 6%;
+    top: 47% ;
+    font-size: small;
+    width: 420px;
+}
+ .image
+{
+    position: absolute;
+    align-items: right;
+    text-align: right;
+    right: 6%;
+    top: 20%;
+}
+.solute h1
+{
+    text-align: center;
+    font-size: 2.75rem;
+    
+}
+.solute nav
+{
+   border-bottom: 2px solid grey;
+   font-size: medium;
+   position: absolute;
+   right: 2%;
+   top: 67%;
+}
+
+.capture
+{
+    width: 250px;
+    border-radius: 2px;
+    transition: 0.001s linear;
+}
+.capture.active
+{
+    border-bottom: 3px solid darkblue;
+    background-color: #eee;
+}
+.capture.inactive
+{
+    border-bottom: none;  
+}
+.become
+{
+    border-radius: 2px;
+    width: 260px;
+}
+.become.active
+{
+    border-bottom: 3px solid darkblue;
+    background-color: #eee;
+}
+.become
+{
+    border-radius: 2px;
+    width: 260px;
+}
+.create
+{
+ border-radius: 2px;
+ width: 160px;   
+}
+.create.active
+{
+    border-bottom: 3px solid darkblue;
+    background-color: #eee;
+}
+.drive
+{
+    border-radius: 2px;
+    width: 250px;
+}
+.drive.active
+{
+    border-bottom: 3px solid darkblue;
+    background-color: #eee;
+}
+.cont 
+{
+    position: absolute;
+    right: -117%;
+    width: 962px;
+    height: 290px;
+    top: 80%;
+    font-size: large;
+    transition: 0.001s linear;
+}
+.cont p1
+{
+    font-size: x-large;
+    position: absolute;
+    right: 96.20%;
+    /* top: 44%; */
+
+}
+.cont p2
+{
+    font-size: xx-small;
+    position: absolute;
+    top: 14%;
+    right: 67.5%;
+    width: 300px;
+
+}
+.cont p3
+{
+    font-size: Medium;
+    position: absolute;
+    top: 23%;
+    right: 67.5%;
+    width: 300px;
+
+}
+.cont p4
+{
+    font-size: Medium;
+    position: absolute;
+    top: 34%;
+    right: 46.75%;
+    width: 500px;
+
+}
+.cont p5
+{
+    font-size: Medium;
+    position: absolute;
+    top: 39%;
+    right: 40.9%;
+    width: 570px;
+    border-bottom:1px solid grey ;
+    padding: 1.5%;
+
+}
+.cont p6
+{
+    font-size: Medium;
+    position: absolute;
+    top: 68%;
+    right: 45.85%;
+    width: 510px;
+
+}
+.cont p7
+{
+    font-size: small;
+    position: absolute;
+    top: 90%;
+    right: 45.65%;
+    width: 510px;
+
+}
+.explore 
+{
+    right: 0.45%;
+    padding: 2%;
+    border-radius: 0.5rem;
+    height: 290px;
+    width: 260px;
+    position: absolute;
+    border: 1px solid grey;
+    font-size: xx-small;
+    background-color: #f7f6f6;
+
+}
+.explore a:hover
+{
+    background-color: #eee;
+}
+.discovery
+{
+    background-color:  #f7f6f6;
+    width: 258px;
+    font-size: medium;
+    position: absolute;
+   right: 0%;
+   height: 65px;
+   top: 23%;
+   padding: 6%;
+   border-bottom: 1px solid grey ;
+}
+.Deploys
+{
+    background-color: #f7f6f6;
+    width: 258px;
+    font-size: medium;
+    position: absolute;
+    right: 0%;
+    top: 46%;
+    border-bottom: 1px solid grey;
+    padding: 6%;
+}
+.Deployss
+{
+    background-color: #f7f6f6;
+    width: 258px;
+    height: 60px;
+    font-size: medium;
+    position: absolute;
+    right: 0%;
+    top: 46%;
+    border-bottom: 1px solid grey;
+    padding: 6%;
+}
+.convo
+{
+    background-color: #f7f6f6; 
+    width: 258px;
+    height: 68px;
+    font-size: medium;
+    position: absolute;
+    right: 0%;
+    padding: 6%;
+    top: 71%;
+}
+.cont.active
+{
+    right: 17%;
+    
+}
+.cont.inactive
+{
+    display: none;
+}
+.be 
+{
+    position: absolute;
+    right: -117%;
+    width: 962px;
+    height: 390px;
+    top: 80%;
+    font-size: large;
+    transition: 0.001s linear;
+}
+.be.active
+{
+    right: 17%;
+}
+.be.inactive
+{
+    display: none;
+}
+.be p1
+{
+    font-size: x-large;
+    position: absolute;
+    right: 95.30%;
+    /* top: 44%; */
+
+}
+.be p2
+{
+    font-size: xx-small;
+    position: absolute;
+    top: 14%;
+    right: 67%;
+    width: 300px;
+
+}
+.be p3
+{
+    font-size: Medium;
+    position: absolute;
+    top: 23%;
+    right: 67%;
+    width: 300px;
+
+}
+.be p4
+{
+    font-size: Medium;
+    position: absolute;
+    top: 34%;
+    right: 40.95%;
+    width: 550px;
+
+}
+.be p5
+{
+    font-size: Medium;
+    position: absolute;
+    top: 45%;
+    right: 38.15%;
+    width: 590px;
+    border-bottom:1px solid grey ;
+    padding: 1.5%;
+
+}
+.be p6
+{
+    font-size: Medium;
+    position: absolute;
+    top: 73%;
+    right: 31.45%;
+    width: 640px;
+
+}
+.be p7
+{
+    font-size: small;
+    position: absolute;
+    top: 94%;
+    right: 45.1%;
+    width: 510px;
+
+}
+.sto 
+{
+    position: absolute;
+    right: -117%;
+    width: 962px;
+    height: 290px;
+    top: 80%;
+    font-size: large;
+    transition: 0.001s linear;
+}
+.sto p1
+{
+    font-size: x-large;
+    position: absolute;
+    right: 95.70%;
+    /* top: 44%; */
+
+}
+.sto p2
+{
+    font-size: xx-small;
+    position: absolute;
+    top: 14%;
+    right: 67.1%;
+    width: 300px;
+
+}
+.sto p3
+{
+    font-size: Medium;
+    position: absolute;
+    top: 23%;
+    right: 65.15%;
+    width: 320px;
+
+}
+.sto p4
+{
+    font-size: Medium;
+    position: absolute;
+    top: 34%;
+    right: 41.35%;
+    width: 550px;
+
+}
+.sto p5
+{
+    font-size: Medium;
+    position: absolute;
+    top: 39%;
+    right: 40.9%;
+    width: 570px;
+    border-bottom:1px solid grey ;
+    padding: 1.5%;
+
+}
+.sto p6
+{
+    font-size: Medium;
+    position: absolute;
+    top: 68%;
+    right: 45.85%;
+    width: 510px;
+
+}
+.sto p7
+{
+    font-size: small;
+    position: absolute;
+    top: 98%;
+    right: 45.85%;
+    width: 510px;
+
+}
+.sto.active
+{
+    right: 17%;
+}
+.dri 
+{
+    position: absolute;
+    right: -117%;
+    width: 962px;
+    height: 290px;
+    top: 80%;
+    font-size: large;
+    transition: 0.001s linear;
+}
+.dri p1
+{
+    font-size: x-large;
+    position: absolute;
+    right: 95.70%;
+    /* top: 44%; */
+
+}
+.dri p2
+{
+    font-size: xx-small;
+    position: absolute;
+    top: 14%;
+    right: 67.1%;
+    width: 300px;
+
+}
+.dri p3
+{
+    font-size: Medium;
+    position: absolute;
+    top: 23%;
+    right: 65.1%;
+    width: 320px;
+
+}
+.dri p4
+{
+    font-size: Medium;
+    position: absolute;
+    top: 34%;
+    right: 41.2%;
+    width: 550px;
+
+}
+.dri p5
+{
+    font-size: Medium;
+    position: absolute;
+    top: 47%;
+    right: 40.7%;
+    width: 570px;
+    border-bottom:1px solid grey ;
+    padding: 1.5%;
+
+}
+.dri p6
+{
+    font-size: Medium;
+    position: absolute;
+    top: 77%;
+    right: 45.55%;
+    width: 510px;
+
+}
+.dri p7
+{
+    font-size: small;
+    position: absolute;
+    top: 102%;
+    right: 45.65%;
+    width: 510px;
+
+}
+.dri.active
+{
+    right: 17%;
+}
+.guide
+{
+    border: 1px solid rgb(218, 223, 255) ;
+    position: absolute;
+    width: 1100px;
+    height: 370px;
+    top: 140%;
+    right: 13%;
+    border-radius: 0.75rem;
+    background-color: rgb(218, 223, 255) ;
+}
+.guide p1
+{
+    position: absolute;
+    top: 12%;
+    right: 52%;
+}
+.guide p2
+{
+    font-size: x-large;
+    position:absolute;
+    right: 11.5%;
+    top: 16%;
+}
+.guide p3
+{
+    font-size: medium;
+    position:absolute;
+    width: 440px;
+    top: 32%;
+    right: 5%;
+}
+.read
+{
+    border: 1px solid rgb(85, 85, 255);
+    font-size: small;
+    background-color: rgb(85, 85, 255);
+    padding: 1.5%;
+    position: absolute;
+    border-radius: 0.5rem;
+    right:34.5%;
+    top: 58%;
+    width: 115px;
+    text-align: center;
+}
+.read:hover
+{
+    background-color: rgb(66, 66, 252); 
+    border: 1px solid rgb(66, 66, 252); 
+}
+.check
+{
+    position: absolute;
+    top: 200%;
+    font-size: large;
+    right: 30%;
+
+}
+.elevate
+{
+    border:0.5px solid grey;
+    position: absolute;
+    top: 210%;
+    height: 480px;
+    width: 355px;
+    border-radius: 1rem;
+    right: 62%;
+}
+.elevate:hover
+{
+    border: 1.5px solid #eee;
+}
+.elevate p1
+{
+    position: absolute;
+    right: 1%;
+}
+.elevate p2
+{
+    position: absolute;
+    font-size: large;
+    width: 290px;
+    top: 45%;
+    right: 8%;
+}
+.elevate p3
+{
+    position: absolute;
+    font-size: medium;
+    top: 57%;
+    right: 1%;
+    width: 320px;
+}
+.elevate p4
+{
+    position: absolute;
+    font-size: large;
+    top: 93%;
+    right: 5%;
+}
+.shopify
+{
+    border:0.5px solid grey;
+    position: absolute;
+    top: 210%;
+    height: 480px;
+    width: 355px;
+    border-radius: 1rem;
+    right: 36%;
+}
+.shopify:hover
+{
+    border: 1.5px solid #eee;
+}
+.shopify p1
+{
+    position: absolute;
+    right: 0%;
+    top: 0%;
+}
+.shopify p2
+{
+    position: absolute;
+    font-size: large;
+    width: 280px;
+    top: 51%;
+    right: 10%;
+}
+.shopify p3
+{
+    position: absolute;
+    font-size: medium;
+    top: 75%;
+    right: 0.5%;
+    width: 320px;
+}
+.shopify p4
+{
+    position: absolute;
+    font-size: large;
+    top: 93%;
+    right: 5%;
+}
+.aban
+{
+    border:0.5px solid grey;
+    position: absolute;
+    top: 210%;
+    height: 480px;
+    width: 355px;
+    border-radius: 1rem;
+    right: 10%;
+}
+.aban:hover
+{
+    border: 1.5px solid #eee;
+}
+.aban p1
+{
+    position: absolute;
+    right: 0%;
+    top: 0%;
+}
+.aban p2
+{
+    position: absolute;
+    font-size: large;
+    width: 280px;
+    top: 51%;
+    right: 10%;
+}
+.aban p3
+{
+    position: absolute;
+    font-size: medium;
+    top: 68%;
+    right: 0.5%;
+    width: 320px;
+}
+.aban p4
+{
+    position: absolute;
+    font-size: large;
+    top: 93%;
+    right: 5%;
+}
+.resil
+{
+    border:0.5px solid grey;
+    position: absolute;
+    top: 282%;
+    height: 480px;
+    width: 355px;
+    border-radius: 1rem;
+    right: -162%;
+    transition: 0.001s linear;
+}
+.resil:hover
+{
+    border: 1.5px solid #eee;
+}
+.resil.active
+{
+    right: 62%;
+}
+.resil p1
+{
+    position: absolute;
+    right: 0%;
+    top: 0%;
+}
+.resil p2
+{
+    position: absolute;
+    font-size: large;
+    width: 280px;
+    top: 51%;
+    right: 12%;
+}
+.resil p3
+{
+    position: absolute;
+    font-size: medium;
+    top: 63%;
+    right: 3%;
+    width: 315px;
+}
+.resil p4
+{
+    position: absolute;
+    font-size: large;
+    top: 93%;
+    right: 5%;
+}
+.fullfill
+{
+    border:0.5px solid grey;
+    position: absolute;
+    top: 282%;
+    height: 480px;
+    width: 355px;
+    border-radius: 1rem;
+    right: -136%;
+    transition: 0.001s linear;
+}
+.fullfill:hover
+{
+    border: 1.5px solid #eee;
+}
+.fullfill.active
+{
+    right: 36%;
+}
+.fullfill p1
+{
+    position: absolute;
+    right: 0%;
+    top: 0%;
+}
+.fullfill p2
+{
+    position: absolute;
+    font-size: large;
+    width: 280px;
+    top: 51%;
+    right: 12%;
+}
+.fullfill p3
+{
+    position: absolute;
+    font-size: medium;
+    top: 59%;
+    right: 0.5%;
+    width: 320px;
+}
+.fullfill p4
+{
+    position: absolute;
+    font-size: large;
+    top: 93%;
+    right: 5%;
+}
+.blog
+{
+    border:0.5px solid grey;
+    position: absolute;
+    top: 282%;
+    height: 480px;
+    width: 355px;
+    border-radius: 1rem;
+    right: -110%;
+    transition: 0.001s linear;
+}
+.blog:hover
+{
+    border: 1.5px solid #eee;
+}
+.blog.active
+{
+    right: 10%;
+}
+.blog p1
+{
+    position: absolute;
+    right: 0%;
+    top: 0%;
+}
+.blog p2
+{
+    position: absolute;
+    font-size: large;
+    width: 280px;
+    top: 51%;
+    right: 12%;
+}
+.blog p3
+{
+    position: absolute;
+    font-size: medium;
+    top: 59%;
+    right: 0.5%;
+    width: 320px;
+}
+.blog p4
+{
+    position: absolute;
+    font-size: large;
+    top: 93%;
+    right: 5%;
+}
+.more
+{
+    border: 1px solid grey;
+    font-size: medium;
+    border-radius: 0.25rem;
+    width: 130px;
+    height: 40px;
+    position: absolute;
+    top: 284%;
+    right: 43%;
+    text-align: center;
+    padding: 0.5%;
+    
+}
+.more:hover
+{
+    border: 1px solid black;
+    background-color: #eee;
+}
+.more.active
+{
+    display: none;
+}
+.topbrands
+{
+    position: absolute;
+    top: 298%;
+    right: 11%;
+    width: 1100px;
+    height: 600px;
+}
+.topbrands.active
+{
+    top: 360%;
+}
+.topbrands h1
+{
+   font-size: large;
+   position: absolute;
+   width: 350px;
+   right: 33%;
+   top: 0%;
+}
+.topbrands p1
+{
+   position: absolute;
+   text-align: center;
+   font-size: medium;
+   width: 720px;
+   top: 8%;
+   right: 18%;
+}
+.ultra
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    padding: 1.5%;
+    top: 24%;
+    right: 70%;
+    
+}
+.ultra:hover
+{
+    border: 1px solid #eee;
+    
+}
+.kohl
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    padding: 0.55%;
+    top: 24%;
+    right: 50%;
+    
+}
+.kohl:hover
+{
+    border: 1px solid #eee;
+    
+}
+.thehome
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    padding: 0.55%;
+    top: 24%;
+    right: 30%;
+    
+}
+.thehome:hover
+{
+    border: 1px solid #eee;
+    
+}
+.wayfair
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    padding: 0.55%;
+    top: 24%;
+    right: 10%;
+    
+}
+.wayfair:hover
+{
+    border: 1px solid #eee;
+    
+}
+.target
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    /* padding: 0.15%; */
+    top: 42%;
+    right: 70%;
+    
+}
+.target:hover
+{
+    border: 1px solid #eee;
+    
+}
+.macy
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    padding: 0.5%;
+    top: 42%;
+    right: 50%;
+    
+}
+.macy:hover
+{
+    border: 1px solid #eee;
+    
+}
+.itsy
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    padding: 2%;
+    top: 42%;
+    right: 30%;
+    
+}
+.itsy:hover
+{
+    border: 1px solid #eee;
+    
+}
+.domin
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    padding: 0.5%;
+    top: 42%;
+    right: 10%;
+    
+}
+.domin:hover
+{
+    border: 1px solid #eee;
+    
+}
+.albert
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    padding: 0.5%;
+    top: 60%;
+    right: 70%;
+    
+}
+.albert:hover
+{
+    border: 1px solid #eee;
+    
+}
+.zuli
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    padding: 0.5%;
+    top: 60%;
+    right: 50%;
+    
+}
+.zuli:hover
+{
+    border: 1px solid #eee;
+    
+}
+.lbean
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    padding: 0.5%;
+    top: 60%;
+    right: 30%;
+    
+}
+.lbean:hover
+{
+    border: 1px solid #eee;
+    
+}
+.sevenel
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    padding: 0.1%;
+    top: 60%;
+    right: 10%;
+    
+}
+.sevenel:hover
+{
+    border: 1px solid #eee;
+    
+}
+.allsaint
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    padding: 0.55%;
+    top: 78%;
+    right: 60%;
+    
+}
+.allsaint:hover
+{
+    border: 1px solid #eee;
+    
+}
+.metro
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    padding: 1.5%;
+    top: 78%;
+    right: 40%;
+    
+}
+.metro:hover
+{
+    border: 1px solid #eee;
+    
+}
+.tokop
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    padding: 0.2%;
+    top: 78%;
+    right: 20%;
+    
+}
+.tokop:hover
+{
+    border: 1px solid #eee;
+    
+}
+.topbrands p2
+{
+    font-size: medium;
+    position: absolute;
+    text-align: center;
+    width: 160px;
+    padding: 1%;
+    top: 109%;
+    border-radius: 0.5rem;
+    right: 41.5%;
+}
+.topbrands p2:hover
+{
+    background-color: lightblue;
+}
+.recommended
+{
+    position: absolute;
+    top: 405%;
+    right: 10%;
+    width: 1100px;
+    height: 600px;
+}
+.recommended.active
+{
+    top: 467%;
+}
+.recommended h1
+{
+   font-size: x-large;
+   position: absolute;
+   width: 350px;
+   right: 33%;
+   top: 0%;
+}
+.recommended p1
+{
+   position: absolute;
+   text-align: center;
+   font-size: medium;
+   width: 720px;
+   top: 8%;
+   right: 18%;
+}
+.recommended p2
+{
+    font-size: medium;
+    position: absolute;
+    text-align: center;
+    width: 160px;
+    padding: 1%;
+    top: 160%;
+    border-radius: 0.5rem;
+    right: 41.5%;
+}
+.recommended p2:hover
+{
+    background-color: lightblue;
+}
+.accen
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    padding: 0.25%;
+    top: 24%;
+    right: 70%;
+    
+}
+.accen:hover
+{
+    border: 1px solid #eee;
+    
+}
+.delloi
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    padding: 0.55%;
+    top: 42%;
+    right: 70%;
+    
+}
+.delloi:hover
+{
+    border: 1px solid #eee;
+    
+}
+.manhat
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    padding: 0.55%;
+    top: 60%;
+    right: 10%;
+    
+}
+.manhat:hover
+{
+    border: 1px solid #eee;
+    
+}
+.mretail
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    padding: 0.5%;
+    top: 78%;
+    right: 70%;
+    
+}
+.mretail:hover
+{
+    border: 1px solid #eee;
+    
+}
+.ncr
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    padding: 1.35%;
+    top: 78%;
+    right: 50%;
+    
+}
+.ncr:hover
+{
+    border: 1px solid #eee;
+    
+}
+.osolutions
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    padding: 0.1%;
+    top: 78%;
+    right: 30%;
+    
+}
+.osolutions:hover
+{
+    border: 1px solid #eee;
+    
+}
+.quantum
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    padding: 0.55%;
+    top: 78%;
+    right: 10%;
+    
+}
+.quantum:hover
+{
+    border: 1px solid #eee;
+    
+}
+.qubit
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    padding: 0.5%;
+    top: 96%;
+    right: 70%;
+    
+}
+.qubit:hover
+{
+    border: 1px solid #eee;
+    
+}
+.sensormatic
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    padding: 1%;
+    top: 96%;
+    right: 50%;
+    
+}
+.sensormatic:hover
+{
+    border: 1px solid #eee;
+    
+}
+.shofy
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    padding: 0.1%;
+    top: 96%;
+    right: 30%;
+    
+}
+.shofy:hover
+{
+    border: 1px solid #eee;
+    
+}
+.slalom
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    top: 96%;
+    right: 10%;
+    
+}
+.slalom:hover
+{
+    border: 1px solid #eee;
+    
+}
+.tata
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    padding: 0.5%;
+    top: 114%;
+    right: 70%;
+    
+}
+.tata:hover
+{
+    border: 1px solid #eee;
+    
+}
+.trax
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    padding: 0.5%;
+    top: 114%;
+    right: 50%;
+    
+}
+.trax:hover
+{
+    border: 1px solid #eee;
+    
+}
+.truefit
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    padding: 0.3%;
+    top: 114%;
+    right: 30%;
+    
+}
+.truefit:hover
+{
+    border: 1px solid #eee;
+    
+}
+.unbxd
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    top: 114%;
+    right: 10%;
+    
+}
+.unbxd:hover
+{
+    border: 1px solid #eee;
+    
+}
+.teamviewer
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    padding: 2%;
+    top: 132%;
+    right: 60%;
+    
+}
+.teamviewer:hover
+{
+    border: 1px solid #eee;
+    
+}
+.zebra
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    padding: 0.7%;
+    top: 132%;
+    right: 40%;
+    
+}
+.zebra:hover
+{
+    border: 1px solid #eee;
+    
+}
+.zeotap
+{
+    position:absolute;
+    width: 192px;
+    height: 80px;
+    border-radius: 1rem;
+    border: 1px solid #a7a5a5;
+    text-align: center;
+    padding: 0.2%;
+    top: 132%;
+    right: 20%;
+    
+}
+.zeotap:hover
+{
+    border: 1px solid #eee;
+    
+}
+.end
+{
+    position: absolute;
+    top: 560%;
+    text-align: center;
+    right: 9%;
+    width: 1100px;
+    height: 500px;
+}
+.end.active
+{
+    top: 622% ;
+}
+.end h1
+{
+    font-size: 500%;
+    width: 560px;
+    position: absolute;
+    right: 24%;
+}
+.end p1
+{
+    font-size: large;
+    position: absolute;
+    top: 27%;
+    text-align: center;
+    right: 23%;
+}
+.end p2
+{
+    border: 1px solid rgb(26, 115, 232) ;
+    font-size: medium;
+    position: absolute;
+    top: 42%;
+    text-align: center;
+    right: 40.5%;
+    width: 200px;
+    height: 45px;
+    padding: 1.2%;
+    border-radius: 0.5rem;
+    background-color: rgb(26, 115, 232);
+}
+.end p2:hover
+{
+    background-color: rgb(14, 58, 117);
+}
+.end p3
+{
+    position: absolute;
+    top: 60%;
+    right: 0%;
+}
+.end p4
+{
+    position: absolute;
+    top: 70%;
+    font-size: medium;
+    font-weight: 530;
+    width: 220px;
+    right: 81.25%;
+}
+.end p5
+{
+    position: absolute;
+    top: 75%;
+    font-size: medium;
+    text-align: center;
+    font-weight: 530;
+    width: 110px;
+    right: 90.5%;
+    border-radius: 0.5rem;
+}
+.end p5:hover
+{
+    background-color: rgb(236, 241, 243);
+}
+.end p6
+{
+    position: absolute;
+    top: 70%;
+    font-size: medium;
+    font-weight: 530;
+    width: 220px;
+    right: 39.5%;
+}
+.end p7
+{
+    position: absolute;
+    top: 75%;
+    font-size: medium;
+    text-align: center;
+    font-weight: 530;
+    width: 110px;
+    right: 48.1%;
+    border-radius: 0.5rem;
+}
+.end p7:hover
+{
+    background-color: rgb(236, 241, 243);
+}
+.end p8
+{
+    position: absolute;
+    top: 70%;
+    font-size: medium;
+    font-weight: 530;
+    width: 220px;
+    right: -2%;
+}
+.end p9
+{
+    position: absolute;
+    top: 75%;
+    font-size: medium;
+    text-align: center;
+    font-weight: 530;
+    width: 140px;
+    right: 3.6%;
+    border-radius: 0.5rem;
+}
+.end p9:hover
+{
+    background-color: rgb(236, 241, 243);
+}
+@media (max-width: 991px) {
+    header 
+    {
+        font-size: xx-large;
+        justify-content: center;
+    }
+}
+
+/* @media (max-width: 768px) {
+    .logo {
+        font-size: large;
+    }
+
+    .search-form {
+        width: 100%;
+        right: 0;
+    }
+
+    nav, .language, .profile, .signup {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        margin: 5px 0;
+    }
+
+    nav a {
+        padding: 5px;
+    }
+
+    .banner {
+        margin-top: 12rem;
+        padding: 3rem;
+    }
+
+    .banner h2 {
+        font-size: 3rem;
+    }
+
+    .banner p {
+        font-size: 1.4rem;
+    }
+} */
+
+
+
