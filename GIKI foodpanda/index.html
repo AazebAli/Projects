@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>GIKI FoodPanda</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #202020;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* Mobile App Container - iPhone dimensions */
+        #app-container {
+            width: 100%;
+            height: 100%;
+            max-width: 414px;
+            max-height: 896px;
+            background-color: #F9FAFB;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 25px rgba(0,0,0,0.6);
+        }
+
+        /* Scrollable Content Area */
+        .page-content {
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: 100px; /* Space for bottom nav */
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            width: 100%;
+            -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
+        }
+        .page-content::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* View Management */
+        .view {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #F9FAFB;
+            flex-direction: column;
+        }
+        
+        .view.active {
+            display: flex;
+            z-index: 10;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .animate-slide-up {
+            animation: slideUp 0.4s ease-out;
+        }
+
+        /* BRAND COLOR - DEEP MAROON from Prototype Image */
+        .bg-brand { background-color: #8B1E24; }
+        .text-brand { color: #8B1E24; }
+        .border-brand { border-color: #8B1E24; }
+        .hover-bg-brand:hover { background-color: #6d161b; }
+        
+        /* Specific Styles */
+        .glass-header {
+            background: rgba(139, 30, 36, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Hide nav on splash/login */
+        .no-nav #bottom-nav { display: none; }
+        .vendor-mode #bottom-nav { display: none; } /* Vendor has own nav usually, or different structure */
+
+        /* Custom Shapes */
+        .rounded-b-4xl { border-bottom-left-radius: 40px; border-bottom-right-radius: 40px; }
+        
+        /* Tabs */
+        .tab-active {
+            border-bottom: 2px solid #8B1E24;
+            color: #8B1E24;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app-container" class="no-nav">
+        
+        <!-- ==================== SPLASH SCREEN ==================== -->
+        <div id="view-splash" class="view active bg-brand flex flex-col justify-center items-center text-white z-50">
+            <div class="mb-8 animate-pulse">
+                <div class="w-32 h-32 rounded-full bg-white flex items-center justify-center shadow-2xl border-4 border-yellow-500 overflow-hidden p-2">
+                     <!-- GIKI LOGO REPLACEMENT -->
+                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu_Mx59gHtEJjM8s5NmEY7ilRT0-zPiDXzVA&s" 
+                          alt="GIKI Logo" 
+                          class="w-full h-full object-contain">
+                </div>
+            </div>
+            <h1 class="text-3xl font-bold tracking-widest uppercase mb-2">GIKI FoodPanda</h1>
+            <div class="h-1 w-20 bg-yellow-500 rounded mb-4"></div>
+            <p class="text-sm opacity-80 font-light tracking-wider">CAMPUS DINING APP</p>
+            
+            <div class="absolute bottom-12 p-6 cursor-pointer z-50" onclick="navigateTo('view-login')">
+                <div class="animate-bounce">
+                    <span class="text-xs font-bold uppercase tracking-widest border-2 border-white px-8 py-3 rounded-full hover:bg-white hover:text-brand transition shadow-lg">Enter</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== LOGIN SCREEN ==================== -->
+        <div id="view-login" class="view bg-brand px-8 relative z-40">
+            <div class="absolute top-0 left-0 w-full h-1/2 flex justify-center items-center flex-col">
+                <div class="w-24 h-24 rounded-full bg-white flex items-center justify-center border-4 border-yellow-500 overflow-hidden mb-4 shadow-lg p-2">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu_Mx59gHtEJjM8s5NmEY7ilRT0-zPiDXzVA&s" 
+                         class="w-full h-full object-contain">
+                </div>
+                <h2 class="text-2xl font-bold text-white">Welcome</h2>
+                <p class="text-white text-xs opacity-70 mt-1">Order food or Manage Restaurant</p>
+            </div>
+            
+            <div class="absolute bottom-0 left-0 w-full h-2/3 bg-white rounded-t-[40px] px-8 pt-12 pb-8 shadow-[0_-10px_40px_rgba(0,0,0,0.2)] animate-slide-up">
+                <div class="flex mb-6 border-b border-gray-200">
+                    <button id="tab-student" class="flex-1 pb-2 text-center text-sm font-bold text-brand border-b-2 border-brand" onclick="switchLoginTab('student')">Student</button>
+                    <button id="tab-vendor" class="flex-1 pb-2 text-center text-sm text-gray-400 font-medium" onclick="switchLoginTab('vendor')">Vendor</button>
+                </div>
+
+                <form onsubmit="handleLogin(event)">
+                    <div class="mb-6">
+                        <label class="block text-gray-500 text-xs font-bold mb-2 uppercase tracking-wide">Email Address</label>
+                        <div class="flex items-center border-b-2 border-gray-200 py-2 focus-within:border-brand transition">
+                            <i class="fas fa-envelope text-gray-400 mr-3"></i>
+                            <input id="login-email" type="email" value="student@giki.edu.pk" class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none font-medium">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-10">
+                        <label class="block text-gray-500 text-xs font-bold mb-2 uppercase tracking-wide">Password</label>
+                        <div class="flex items-center border-b-2 border-gray-200 py-2 focus-within:border-brand transition">
+                            <i class="fas fa-lock text-gray-400 mr-3"></i>
+                            <input type="password" value="password" class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none font-medium">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-brand text-white font-bold py-4 rounded-xl shadow-lg shadow-red-900/20 hover:bg-opacity-90 transition transform active:scale-[0.98] flex justify-center items-center gap-2 relative z-50">
+                        <span id="login-btn-text">LOGIN AS STUDENT</span>
+                        <i class="fas fa-arrow-right text-xs"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- ==================== HOME SCREEN ==================== -->
+        <div id="view-home" class="view bg-gray-50">
+            <!-- Header -->
+            <div class="bg-brand text-white pt-10 pb-6 px-6 rounded-b-[35px] shadow-lg relative z-20 flex-shrink-0">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="flex items-center gap-3 cursor-pointer hover:opacity-90 transition" onclick="navigateTo('view-profile')">
+                        <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center border border-white/30">
+                            <i class="fas fa-user text-sm"></i>
+                        </div>
+                        <div>
+                            <p class="text-[10px] opacity-80 uppercase tracking-wide">Good Morning</p>
+                            <h2 class="text-lg font-bold">Student User</h2>
+                        </div>
+                    </div>
+                    <div class="relative cursor-pointer p-2" onclick="navigateTo('view-cart')">
+                        <i class="fas fa-shopping-basket text-xl"></i>
+                        <span id="cart-badge-home" class="absolute -top-1 -right-1 bg-yellow-400 text-brand text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+                    </div>
+                </div>
+                
+                <!-- Search Bar -->
+                <div class="relative transform translate-y-2">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <i class="fas fa-search text-gray-400"></i>
+                    </div>
+                    <input type="text" class="w-full bg-white text-gray-800 text-sm rounded-xl py-3.5 pl-12 pr-4 shadow-md focus:outline-none placeholder-gray-400" placeholder="Search for food, drinks...">
+                </div>
+            </div>
+
+            <div class="page-content px-5 pt-8">
+                <!-- Track Order Button (Visible only if order active) -->
+                <div id="home-track-btn" class="hidden mb-6">
+                    <button onclick="navigateTo('view-tracking')" class="w-full bg-blue-600 text-white p-4 rounded-xl shadow-lg flex items-center justify-between animate-pulse">
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-shipping-fast text-xl"></i>
+                            <div class="text-left">
+                                <p class="text-[10px] opacity-80 uppercase">In Progress</p>
+                                <p class="font-bold text-sm" id="home-track-text">Track Orders</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-right text-xs"></i>
+                    </button>
+                </div>
+
+                <!-- Categories -->
+                <div class="flex justify-between items-end mb-4">
+                    <h3 class="font-bold text-gray-800 text-lg">Categories</h3>
+                </div>
+                
+                <div class="flex justify-between gap-2 overflow-x-auto pb-2 hide-scroll">
+                    <button onclick="filterMenu('all')" class="flex flex-col items-center gap-2 min-w-[60px] group">
+                        <div class="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center text-brand border border-gray-100 group-hover:bg-brand group-hover:text-white transition shadow-red-900/5">
+                            <i class="fas fa-border-all"></i>
+                        </div>
+                        <span class="text-[10px] font-medium text-gray-500">All</span>
+                    </button>
+                    <button onclick="filterMenu('fastfood')" class="flex flex-col items-center gap-2 min-w-[60px] group">
+                        <div class="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center text-gray-400 border border-gray-100 group-hover:bg-brand group-hover:text-white transition">
+                            <i class="fas fa-hamburger"></i>
+                        </div>
+                        <span class="text-[10px] font-medium text-gray-500">Burger</span>
+                    </button>
+                    <button onclick="filterMenu('desi')" class="flex flex-col items-center gap-2 min-w-[60px] group">
+                        <div class="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center text-gray-400 border border-gray-100 group-hover:bg-brand group-hover:text-white transition">
+                            <i class="fas fa-bowl-rice"></i>
+                        </div>
+                        <span class="text-[10px] font-medium text-gray-500">Desi</span>
+                    </button>
+                    <button onclick="filterMenu('drinks')" class="flex flex-col items-center gap-2 min-w-[60px] group">
+                        <div class="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center text-gray-400 border border-gray-100 group-hover:bg-brand group-hover:text-white transition">
+                            <i class="fas fa-coffee"></i>
+                        </div>
+                        <span class="text-[10px] font-medium text-gray-500">Drink</span>
+                    </button>
+                    <button onclick="filterMenu('dessert')" class="flex flex-col items-center gap-2 min-w-[60px] group">
+                        <div class="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center text-gray-400 border border-gray-100 group-hover:bg-brand group-hover:text-white transition">
+                            <i class="fas fa-ice-cream"></i>
+                        </div>
+                        <span class="text-[10px] font-medium text-gray-500">Sweet</span>
+                    </button>
+                </div>
+
+                <!-- Popular -->
+                <h3 class="font-bold text-gray-800 text-lg mt-6 mb-4">Menu Items</h3>
+                <div class="grid grid-cols-2 gap-4 pb-4" id="home-products-grid">
+                    <!-- Products injected via JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== MENU SCREEN ==================== -->
+        <div id="view-menu" class="view bg-gray-50">
+            <div class="bg-white shadow-sm pt-10 pb-4 px-6 sticky top-0 z-20 flex justify-between items-center">
+                <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center cursor-pointer hover:bg-gray-200 transition" onclick="navigateTo('view-home')">
+                    <i class="fas fa-arrow-left text-gray-600 text-sm"></i>
+                </div>
+                <h2 class="font-bold text-lg text-gray-800">Our Menu</h2>
+                <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center cursor-pointer hover:bg-gray-200 transition" onclick="navigateTo('view-profile')">
+                     <i class="fas fa-user text-brand text-sm"></i>
+                </div>
+            </div>
+            <div class="page-content px-5 py-6">
+                <div id="menu-list" class="space-y-4">
+                    <!-- Menu items injected via JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== CART SCREEN ==================== -->
+        <div id="view-cart" class="view bg-gray-50">
+            <div class="bg-brand text-white pt-10 pb-6 px-6 rounded-b-[30px] shadow-lg flex-shrink-0 z-20">
+                <div class="flex justify-between items-start mb-2">
+                    <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center cursor-pointer hover:bg-white/30 transition" onclick="navigateTo('view-home')">
+                        <i class="fas fa-arrow-left text-white text-sm"></i>
+                    </div>
+                    <div class="flex-1 text-center pr-8">
+                         <h2 class="font-bold text-lg">My Cart</h2>
+                    </div>
+                </div>
+                <p class="text-center text-xs opacity-70 mt-1" id="cart-count-header">0 items</p>
+            </div>
+
+            <div class="page-content px-5 py-6 flex flex-col h-full">
+                <div id="cart-items-container" class="flex-1">
+                    <!-- Cart items or empty state -->
+                </div>
+
+                <div id="checkout-section" class="bg-white p-6 rounded-[30px] shadow-[0_-10px_30px_rgba(0,0,0,0.05)] mt-4 mb-20 hidden">
+                    <div class="flex justify-between mb-3 text-sm text-gray-500">
+                        <span>Subtotal</span>
+                        <span id="cart-subtotal" class="font-medium text-gray-800">Rs. 0</span>
+                    </div>
+                    <div class="flex justify-between mb-4 text-sm text-gray-500">
+                        <span>Tax (5%)</span>
+                        <span id="cart-tax" class="font-medium text-gray-800">Rs. 0</span>
+                    </div>
+                    <div class="h-px bg-gray-100 w-full mb-4"></div>
+                    <div class="flex justify-between mb-6 text-xl font-bold text-gray-800">
+                        <span>Total</span>
+                        <span id="cart-total" class="text-brand">Rs. 0</span>
+                    </div>
+                    <button onclick="processCheckout()" class="w-full bg-brand text-white font-bold py-4 rounded-2xl shadow-lg shadow-red-900/20 hover:bg-opacity-90 active:scale-[0.98] transition">
+                        Place Order
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== TRACKING SCREEN (UPDATED) ==================== -->
+        <div id="view-tracking" class="view bg-gray-50">
+            <div class="bg-white shadow-sm pt-10 pb-4 px-6 sticky top-0 z-20 flex items-center">
+                 <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center cursor-pointer hover:bg-gray-200 transition" onclick="navigateTo('view-home')">
+                    <i class="fas fa-arrow-left text-gray-600 text-sm"></i>
+                </div>
+                <h2 class="font-bold text-lg text-gray-800 ml-4">Active Orders</h2>
+            </div>
+            <div class="page-content px-4 py-6">
+                <div id="tracking-orders-list" class="space-y-4">
+                    <!-- Orders List Injected Here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== PAYMENT METHODS SCREEN ==================== -->
+        <div id="view-payment" class="view bg-gray-50">
+            <div class="bg-white shadow-sm pt-10 pb-4 px-6 sticky top-0 z-20 flex items-center">
+                 <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center cursor-pointer hover:bg-gray-200 transition" onclick="navigateTo('view-profile')">
+                    <i class="fas fa-arrow-left text-gray-600 text-sm"></i>
+                </div>
+                <h2 class="font-bold text-lg text-gray-800 ml-4">Payment Methods</h2>
+            </div>
+            <div class="page-content px-5 py-6">
+                <div class="space-y-4">
+                    <!-- Card Option -->
+                    <div onclick="selectPaymentMethod('card')" id="pay-opt-card" class="payment-opt bg-white p-4 rounded-2xl border-2 border-transparent shadow-sm cursor-pointer transition hover:shadow-md flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-800">Credit / Debit Card</h4>
+                                <p class="text-[10px] text-gray-400">Visa, Mastercard</p>
+                            </div>
+                        </div>
+                        <div class="radio-indicator w-5 h-5 rounded-full border-2 border-gray-300"></div>
+                    </div>
+
+                    <!-- Wallet Option -->
+                    <div onclick="selectPaymentMethod('wallet')" id="pay-opt-wallet" class="payment-opt bg-white p-4 rounded-2xl border-2 border-transparent shadow-sm cursor-pointer transition hover:shadow-md flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center text-purple-600">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-800">Digital Wallet</h4>
+                                <p class="text-[10px] text-gray-400">EasyPaisa, JazzCash</p>
+                            </div>
+                        </div>
+                        <div class="radio-indicator w-5 h-5 rounded-full border-2 border-gray-300"></div>
+                    </div>
+
+                    <!-- COD Option -->
+                    <div onclick="selectPaymentMethod('cod')" id="pay-opt-cod" class="payment-opt bg-white p-4 rounded-2xl border-2 border-brand shadow-sm cursor-pointer transition hover:shadow-md flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center text-green-600">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-800">Cash on Delivery</h4>
+                                <p class="text-[10px] text-gray-400">Pay when you receive</p>
+                            </div>
+                        </div>
+                        <div class="radio-indicator w-5 h-5 rounded-full border-2 border-brand bg-brand flex items-center justify-center">
+                            <i class="fas fa-check text-white text-[10px]"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="card-details-form" class="hidden mt-6 bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
+                    <h3 class="font-bold text-sm mb-3">Card Details</h3>
+                    <input type="text" placeholder="Card Number" class="w-full mb-3 p-3 bg-gray-50 rounded-xl text-sm outline-none focus:ring-1 focus:ring-brand">
+                    <div class="flex gap-3">
+                        <input type="text" placeholder="MM/YY" class="w-1/2 p-3 bg-gray-50 rounded-xl text-sm outline-none focus:ring-1 focus:ring-brand">
+                        <input type="text" placeholder="CVC" class="w-1/2 p-3 bg-gray-50 rounded-xl text-sm outline-none focus:ring-1 focus:ring-brand">
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <button onclick="confirmPaymentMethod()" class="w-full bg-brand text-white font-bold py-4 rounded-xl shadow-lg shadow-red-900/20 active:scale-[0.98] transition">
+                        Confirm Payment Method
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== VENDOR DASHBOARD ==================== -->
+        <div id="view-vendor-dashboard" class="view bg-gray-100">
+            <div class="bg-brand text-white pt-10 pb-6 px-6 rounded-b-[35px] shadow-lg flex-shrink-0 z-20">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="font-bold text-xl">Vendor Portal</h2>
+                    <button onclick="logout()" class="text-xs bg-white/20 px-3 py-1 rounded-full hover:bg-white/30">Logout</button>
+                </div>
+                <div class="flex gap-4">
+                    <button id="v-tab-orders" onclick="switchVendorTab('orders')" class="px-4 py-2 bg-white text-brand rounded-full text-sm font-bold shadow-md">Orders</button>
+                    <button id="v-tab-menu" onclick="switchVendorTab('menu')" class="px-4 py-2 bg-white/30 text-white rounded-full text-sm font-medium hover:bg-white/40">Menu</button>
+                </div>
+            </div>
+
+            <div class="page-content px-4 py-6">
+                <!-- VENDOR ORDERS TAB -->
+                <div id="vendor-orders-tab" class="block">
+                    <h3 class="font-bold text-gray-700 mb-4">Incoming Orders</h3>
+                    <div id="vendor-orders-list" class="space-y-4">
+                        <!-- Order Cards -->
+                    </div>
+                </div>
+
+                <!-- VENDOR MENU TAB -->
+                <div id="vendor-menu-tab" class="hidden">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-bold text-gray-700">Manage Menu</h3>
+                        <button onclick="showAddItemModal()" class="bg-brand text-white w-8 h-8 rounded-full shadow flex items-center justify-center"><i class="fas fa-plus"></i></button>
+                    </div>
+                    
+                    <div id="vendor-menu-list" class="space-y-3">
+                        <!-- Menu Items -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Item Modal -->
+        <div id="add-item-modal" class="fixed inset-0 bg-black/50 z-[60] hidden flex items-center justify-center p-4">
+            <div class="bg-white rounded-2xl w-full max-w-sm p-6 shadow-2xl">
+                <h3 id="modal-title" class="font-bold text-lg mb-4 text-gray-800">Add New Item</h3>
+                <input id="new-item-name" type="text" placeholder="Item Name" class="w-full mb-3 p-3 border rounded-xl bg-gray-50 text-sm">
+                <input id="new-item-price" type="number" placeholder="Price (Rs)" class="w-full mb-3 p-3 border rounded-xl bg-gray-50 text-sm">
+                <input id="new-item-desc" type="text" placeholder="Short Description" class="w-full mb-3 p-3 border rounded-xl bg-gray-50 text-sm">
+                <select id="new-item-cat" class="w-full mb-3 p-3 border rounded-xl bg-gray-50 text-sm">
+                    <option value="fastfood">Fast Food</option>
+                    <option value="desi">Desi</option>
+                    <option value="drinks">Drinks</option>
+                    <option value="dessert">Dessert</option>
+                </select>
+                <div class="flex gap-3 mt-4">
+                    <button onclick="hideAddItemModal()" class="flex-1 py-3 text-gray-500 font-bold">Cancel</button>
+                    <button id="modal-action-btn" onclick="handleItemFormSubmit()" class="flex-1 py-3 bg-brand text-white rounded-xl font-bold shadow-lg">Add Item</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== PROFILE SCREEN ==================== -->
+        <div id="view-profile" class="view bg-gray-50">
+            <div class="bg-brand h-48 relative rounded-b-[45px] mb-14 flex-shrink-0">
+                <div class="absolute top-10 left-6 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center cursor-pointer hover:bg-white/30 transition z-30" onclick="navigateTo('view-home')">
+                    <i class="fas fa-arrow-left text-white text-sm"></i>
+                </div>
+                 <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2">
+                    <div class="w-28 h-28 rounded-full border-[6px] border-gray-50 bg-white overflow-hidden shadow-xl">
+                        <img src="https://ui-avatars.com/api/?name=S+U&background=random&color=fff" alt="Profile" class="w-full h-full object-cover">
+                    </div>
+                 </div>
+            </div>
+            
+            <div class="text-center mb-6 px-6">
+                <h2 class="text-2xl font-bold text-gray-800">Student User</h2>
+                <p class="text-gray-400 text-sm font-medium uppercase tracking-wide mt-1">Faculty of Engineering</p>
+            </div>
+
+            <div class="page-content px-6">
+                <div class="bg-white rounded-2xl p-4 mb-4 border border-gray-50 shadow-sm">
+                    <label class="block text-gray-400 text-[10px] font-bold mb-2 uppercase tracking-wider">My Hostel</label>
+                    <div class="relative">
+                        <select id="hostel-select" class="block appearance-none w-full bg-gray-50 border border-gray-100 text-gray-700 py-3 px-4 pr-8 rounded-xl leading-tight focus:outline-none focus:bg-white focus:border-brand font-medium text-sm transition">
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="bg-white rounded-2xl p-4 flex items-center justify-between cursor-pointer hover:shadow-md transition border border-gray-50" onclick="handleMyOrdersClick()">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center text-brand">
+                                <i class="fas fa-receipt"></i>
+                            </div>
+                            <span class="font-semibold text-gray-700 text-sm">My Orders</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-300 text-xs"></i>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-4 flex items-center justify-between cursor-pointer hover:shadow-md transition border border-gray-50" onclick="navigateTo('view-payment')">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center text-brand">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <span class="font-semibold text-gray-700 text-sm">Payment</span>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-300 text-xs"></i>
+                    </div>
+                </div>
+
+                <button onclick="logout()" class="mt-8 w-full border-2 border-brand text-brand py-3 rounded-2xl font-bold text-sm hover:bg-brand hover:text-white transition shadow-sm">
+                    LOG OUT
+                </button>
+            </div>
+        </div>
+
+        <!-- ==================== BOTTOM NAVIGATION ==================== -->
+        <div id="bottom-nav" class="absolute bottom-0 left-0 w-full bg-white flex justify-around items-center py-2 pb-6 px-4 shadow-[0_-10px_30px_rgba(0,0,0,0.05)] z-50 rounded-t-[30px]">
+            <button onclick="navigateTo('view-home')" class="nav-btn active flex flex-col items-center justify-center w-12 h-12 text-gray-300 transition duration-300">
+                <i class="fas fa-home text-xl mb-1"></i>
+            </button>
+            <button onclick="navigateTo('view-menu')" class="nav-btn flex flex-col items-center justify-center w-12 h-12 text-gray-300 transition duration-300">
+                <i class="fas fa-th-large text-xl mb-1"></i>
+            </button>
+            
+            <div class="relative -top-8">
+                <button onclick="navigateTo('view-cart')" class="bg-brand text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg shadow-red-900/30 transform transition active:scale-90 border-[6px] border-[#F9FAFB]">
+                    <i class="fas fa-shopping-basket text-xl"></i>
+                    <span id="cart-badge-nav" class="absolute top-0 right-0 bg-yellow-400 text-brand text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center hidden border-2 border-white">0</span>
+                </button>
+            </div>
+
+            <button onclick="navigateTo('view-profile')" class="nav-btn flex flex-col items-center justify-center w-12 h-12 text-gray-300 transition duration-300">
+                <i class="fas fa-heart text-xl mb-1"></i>
+            </button>
+            <button onclick="navigateTo('view-profile')" class="nav-btn flex flex-col items-center justify-center w-12 h-12 text-gray-300 transition duration-300">
+                <i class="fas fa-user text-xl mb-1"></i>
+            </button>
+        </div>
+
+        <div id="toast" class="fixed top-6 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white px-6 py-3 rounded-full shadow-2xl z-[100] transition-all duration-300 opacity-0 translate-y-[-20px] pointer-events-none flex items-center gap-3 min-w-max">
+            <div class="bg-green-500 rounded-full p-1"><i class="fas fa-check text-[10px]"></i></div>
+            <span id="toast-message" class="text-sm font-medium">Action successful</span>
+        </div>
+
+    </div>
+
+    <script>
+        // --- DATA ---
+        // Global orders storage for Vendor/Student communication
+        let globalOrders = []; 
+        let currentRole = 'student'; // 'student' or 'vendor'
+        let editingItemId = null; // Track which item is being edited
+        
+        let products = [
+            { id: 1, name: "Zinger Burger", price: 450, category: "fastfood", image: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60", desc: "Crispy chicken fillet, cheese, lettuce", inStock: true },
+            { id: 2, name: "Chicken Pizza", price: 1200, category: "fastfood", image: "https://images.unsplash.com/photo-1628840042765-356cda07504e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60", desc: "Large slice, extra cheese", inStock: true },
+            { id: 3, name: "Cold Coffee", price: 250, category: "drinks", image: "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60", desc: "Cold brew with milk", inStock: true },
+            { id: 4, name: "Masala Fries", price: 150, category: "fries", image: "https://images.unsplash.com/photo-1598679253544-2c97992403ea?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8ZnJpZXN8ZW58MHx8MHx8fDA%3D", desc: "Crispy salted fries", inStock: true },
+            { id: 5, name: "Oreo Shake", price: 300, category: "drinks", image: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60", desc: "Vanilla ice cream w/ fudge", inStock: true },
+            { id: 6, name: "Chicken Roll", price: 200, category: "desi", image: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60", desc: "Grilled chicken, spicy mayo", inStock: true },
+            { id: 7, name: "Fresh Juice", price: 300, category: "drinks", image: "https://images.unsplash.com/photo-1613478223719-2ab802602423?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60", desc: "Freshly squeezed", inStock: true },
+            { id: 8, name: "Donut Box", price: 500, category: "dessert", image: "https://images.unsplash.com/photo-1551024601-bec78aea704b", desc: "3 Assorted donuts", inStock: true }
+        ];
+
+        let cart = [];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderHomeProducts();
+            renderMenuList();
+            populateHostelDropdown();
+        });
+
+        function populateHostelDropdown() {
+            const select = document.getElementById('hostel-select');
+            let options = '<option value="" disabled selected>Select Hostel</option>';
+            for(let i=1; i<=13; i++) {
+                options += `<option value="Hostel ${i}">Hostel ${i}</option>`;
+            }
+            select.innerHTML = options;
+        }
+
+        // --- NAVIGATION & LOGIN LOGIC ---
+        function switchLoginTab(role) {
+            currentRole = role;
+            const btnText = document.getElementById('login-btn-text');
+            const emailInput = document.getElementById('login-email');
+            
+            document.getElementById('tab-student').className = role === 'student' ? "flex-1 pb-2 text-center text-sm font-bold text-brand border-b-2 border-brand" : "flex-1 pb-2 text-center text-sm text-gray-400 font-medium";
+            document.getElementById('tab-vendor').className = role === 'vendor' ? "flex-1 pb-2 text-center text-sm font-bold text-brand border-b-2 border-brand" : "flex-1 pb-2 text-center text-sm text-gray-400 font-medium";
+            
+            if(role === 'vendor') {
+                btnText.innerText = "LOGIN AS PARTNER";
+                emailInput.value = "vendor@giki.edu.pk";
+            } else {
+                btnText.innerText = "LOGIN AS STUDENT";
+                emailInput.value = "student@giki.edu.pk";
+            }
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i>';
+            btn.classList.add('opacity-70');
+            
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.classList.remove('opacity-70');
+                if (currentRole === 'vendor') {
+                    navigateTo('view-vendor-dashboard');
+                    renderVendorOrders();
+                    renderVendorMenu();
+                } else {
+                    navigateTo('view-home');
+                }
+                showToast(`Welcome, ${currentRole === 'vendor' ? 'Partner' : 'Student'}!`);
+            }, 800);
+        }
+
+        function navigateTo(viewId) {
+            const views = document.querySelectorAll('.view');
+            views.forEach(el => {
+                el.classList.remove('active');
+                el.style.zIndex = ''; 
+            });
+            
+            const target = document.getElementById(viewId);
+            if (target) {
+                target.classList.add('active');
+                target.style.zIndex = '60'; 
+            }
+
+            const appContainer = document.getElementById('app-container');
+            const navButtons = document.querySelectorAll('.nav-btn');
+            
+            // Manage Bottom Nav
+            if (viewId.includes('login') || viewId.includes('splash') || viewId.includes('vendor')) {
+                appContainer.classList.add('no-nav');
+            } else {
+                appContainer.classList.remove('no-nav');
+            }
+
+            // Update Nav State
+            navButtons.forEach(btn => {
+                btn.classList.remove('text-brand');
+                btn.classList.add('text-gray-300');
+                if(btn.getAttribute('onclick').includes(viewId)) {
+                    btn.classList.add('text-brand');
+                    btn.classList.remove('text-gray-300');
+                }
+            });
+
+            if (viewId === 'view-cart') renderCart();
+            if (viewId === 'view-tracking') updateTrackingUI();
+            
+            // Home tracking pill (Update to show multiple orders if exist)
+            const activeCount = globalOrders.filter(o => o.status !== 'Completed').length;
+            const homeTrackBtn = document.getElementById('home-track-btn');
+            
+            if(viewId === 'view-home' && activeCount > 0) {
+                homeTrackBtn.classList.remove('hidden');
+                document.getElementById('home-track-text').innerText = `${activeCount} Active Order${activeCount > 1 ? 's' : ''}`;
+            } else if (viewId === 'view-home') {
+                homeTrackBtn.classList.add('hidden');
+            }
+        }
+
+        function logout() {
+            cart = [];
+            updateCartCount();
+            navigateTo('view-login');
+            showToast('Logged out successfully');
+        }
+
+        // --- PAYMENT LOGIC ---
+        let selectedPaymentMethod = 'cod'; // Default
+
+        function selectPaymentMethod(method) {
+            selectedPaymentMethod = method;
+            
+            // UI Update
+            document.querySelectorAll('.payment-opt').forEach(el => {
+                el.classList.remove('border-brand');
+                el.classList.add('border-transparent');
+                el.querySelector('.radio-indicator').className = 'radio-indicator w-5 h-5 rounded-full border-2 border-gray-300';
+                el.querySelector('.radio-indicator').innerHTML = '';
+            });
+
+            const activeEl = document.getElementById('pay-opt-' + method);
+            activeEl.classList.remove('border-transparent');
+            activeEl.classList.add('border-brand');
+            activeEl.querySelector('.radio-indicator').className = 'radio-indicator w-5 h-5 rounded-full border-2 border-brand bg-brand flex items-center justify-center';
+            activeEl.querySelector('.radio-indicator').innerHTML = '<i class="fas fa-check text-white text-[10px]"></i>';
+
+            // Show/Hide forms
+            if(method === 'card') document.getElementById('card-details-form').classList.remove('hidden');
+            else document.getElementById('card-details-form').classList.add('hidden');
+        }
+
+        function confirmPaymentMethod() {
+            showToast('Payment Method Updated');
+            setTimeout(() => navigateTo('view-profile'), 500);
+        }
+
+        // --- VENDOR LOGIC ---
+        function switchVendorTab(tab) {
+            if(tab === 'orders') {
+                document.getElementById('vendor-orders-tab').classList.remove('hidden');
+                document.getElementById('vendor-menu-tab').classList.add('hidden');
+                document.getElementById('v-tab-orders').className = "px-4 py-2 bg-white text-brand rounded-full text-sm font-bold shadow-md";
+                document.getElementById('v-tab-menu').className = "px-4 py-2 bg-white/30 text-white rounded-full text-sm font-medium hover:bg-white/40";
+                renderVendorOrders();
+            } else {
+                document.getElementById('vendor-orders-tab').classList.add('hidden');
+                document.getElementById('vendor-menu-tab').classList.remove('hidden');
+                document.getElementById('v-tab-orders').className = "px-4 py-2 bg-white/30 text-white rounded-full text-sm font-medium hover:bg-white/40";
+                document.getElementById('v-tab-menu').className = "px-4 py-2 bg-white text-brand rounded-full text-sm font-bold shadow-md";
+                renderVendorMenu();
+            }
+        }
+
+        function renderVendorOrders() {
+            const list = document.getElementById('vendor-orders-list');
+            if(globalOrders.length === 0) {
+                list.innerHTML = `<p class="text-center text-gray-400 mt-10">No orders yet.</p>`;
+                return;
+            }
+
+            // Sort: Pending first, then Preparing, then Out for Delivery, then Completed
+            const statusWeight = { 'Pending': 1, 'Preparing': 2, 'Out for Delivery': 3, 'Completed': 4 };
+            const sortedOrders = [...globalOrders].sort((a,b) => statusWeight[a.status] - statusWeight[b.status]);
+
+            list.innerHTML = sortedOrders.map(order => {
+                let actionBtn = '';
+                if(order.status === 'Pending') actionBtn = `<button onclick="updateOrderStatus('${order.id}', 'Preparing')" class="bg-brand text-white text-xs px-3 py-1 rounded">Accept & Prepare</button>`;
+                else if(order.status === 'Preparing') actionBtn = `<button onclick="updateOrderStatus('${order.id}', 'Out for Delivery')" class="bg-yellow-500 text-white text-xs px-3 py-1 rounded">Send for Delivery</button>`;
+                else if(order.status === 'Out for Delivery') actionBtn = `<button onclick="updateOrderStatus('${order.id}', 'Completed')" class="bg-green-500 text-white text-xs px-3 py-1 rounded">Complete</button>`;
+                else actionBtn = `<span class="text-green-600 text-xs font-bold">Done</span>`;
+
+                return `
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-bold text-gray-800">${order.id}</span>
+                        <span class="text-xs px-2 py-0.5 rounded ${getStatusColor(order.status)}">${order.status}</span>
+                    </div>
+                    <div class="text-xs text-gray-500 mb-3">
+                        ${order.items.map(i => `${i.qty}x ${i.name}`).join(', ')}
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-brand">Rs. ${order.total}</span>
+                        ${actionBtn}
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        function getStatusColor(status) {
+            if(status === 'Pending') return 'bg-red-100 text-red-600';
+            if(status === 'Preparing') return 'bg-yellow-100 text-yellow-600';
+            if(status === 'Out for Delivery') return 'bg-blue-100 text-blue-600';
+            return 'bg-green-100 text-green-600';
+        }
+
+        function updateOrderStatus(oid, newStatus) {
+            const order = globalOrders.find(o => o.id === oid);
+            if(order) {
+                order.status = newStatus;
+                renderVendorOrders();
+                showToast(`Order ${oid} updated to ${newStatus}`);
+            }
+        }
+
+        function renderVendorMenu() {
+            const list = document.getElementById('vendor-menu-list');
+            
+            // Change grid to single column for better editing UI
+            list.className = "space-y-3"; 
+            
+            list.innerHTML = products.map(p => `
+                <div class="bg-white p-3 rounded-xl shadow-sm border ${p.inStock ? 'border-gray-100' : 'border-red-200 bg-red-50/50'}">
+                    <div class="flex gap-3">
+                        <div class="h-20 w-20 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0 relative">
+                            <img src="${p.image}" class="w-full h-full object-cover ${p.inStock ? '' : 'grayscale opacity-70'}">
+                            ${!p.inStock ? '<div class="absolute inset-0 flex items-center justify-center bg-black/10"><span class="text-[10px] font-bold bg-black text-white px-1 rounded">No Stock</span></div>' : ''}
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex justify-between items-start">
+                                <h4 class="font-bold text-sm text-gray-800 truncate pr-2">${p.name}</h4>
+                                <button onclick="deleteItem(${p.id})" class="text-gray-400 hover:text-red-500 p-1"><i class="fas fa-trash-alt text-xs"></i></button>
+                            </div>
+                            <p class="text-brand text-sm font-bold mb-1">Rs. ${p.price}</p>
+                            <p class="text-[10px] text-gray-400 truncate mb-2">${p.desc}</p>
+                            
+                            <div class="flex gap-2">
+                                <button onclick="openEditModal(${p.id})" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-600 text-[10px] py-2 rounded-lg font-bold transition">
+                                    <i class="fas fa-edit mr-1"></i> Edit
+                                </button>
+                                <button onclick="toggleStock(${p.id})" class="flex-1 ${p.inStock ? 'bg-green-100 text-green-700 hover:bg-green-200' : 'bg-red-100 text-red-600 hover:bg-red-200'} text-[10px] py-2 rounded-lg font-bold transition">
+                                    ${p.inStock ? 'In Stock' : 'Out of Stock'}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleStock(id) {
+            const product = products.find(p => p.id === id);
+            if(product) {
+                product.inStock = !product.inStock;
+                // If checking default value for older items
+                if(product.inStock === undefined) product.inStock = false; 
+                
+                renderVendorMenu();
+                // Refresh student views in background to reflect stock
+                renderHomeProducts(); 
+                renderMenuList();
+                showToast(`Item marked ${product.inStock ? 'In Stock' : 'Out of Stock'}`);
+            }
+        }
+
+        function deleteItem(id) {
+            if(confirm("Are you sure you want to remove this item?")) {
+                products = products.filter(p => p.id !== id);
+                // Also remove from cart if present
+                cart = cart.filter(c => c.id !== id);
+                updateCartCount();
+                
+                renderVendorMenu();
+                renderHomeProducts();
+                renderMenuList();
+                showToast("Item removed");
+            }
+        }
+
+        function showAddItemModal() { 
+            editingItemId = null; // Reset edit mode
+            document.getElementById('add-item-modal').classList.remove('hidden'); 
+            
+            // Reset fields
+            document.getElementById('new-item-name').value = '';
+            document.getElementById('new-item-price').value = '';
+            document.getElementById('new-item-desc').value = '';
+            
+            // Update UI Text
+            document.getElementById('modal-title').innerText = "Add New Item";
+            document.getElementById('modal-action-btn').innerText = "Add Item";
+        }
+
+        function openEditModal(id) {
+            const product = products.find(p => p.id === id);
+            if(!product) return;
+
+            editingItemId = id; // Set edit mode
+            document.getElementById('add-item-modal').classList.remove('hidden');
+
+            // Populate fields
+            document.getElementById('new-item-name').value = product.name;
+            document.getElementById('new-item-price').value = product.price;
+            document.getElementById('new-item-desc').value = product.desc;
+            document.getElementById('new-item-cat').value = product.category;
+
+            // Update UI Text
+            document.getElementById('modal-title').innerText = "Edit Item";
+            document.getElementById('modal-action-btn').innerText = "Update Item";
+        }
+
+        function hideAddItemModal() { 
+            document.getElementById('add-item-modal').classList.add('hidden'); 
+        }
+        
+        function handleItemFormSubmit() {
+            const name = document.getElementById('new-item-name').value;
+            const price = parseFloat(document.getElementById('new-item-price').value);
+            const desc = document.getElementById('new-item-desc').value;
+            const cat = document.getElementById('new-item-cat').value;
+            
+            if(!name || !price) { showToast("Please fill info"); return; }
+
+            if (editingItemId !== null) {
+                // EDIT MODE
+                const product = products.find(p => p.id === editingItemId);
+                if(product) {
+                    product.name = name;
+                    product.price = price;
+                    product.desc = desc;
+                    product.category = cat;
+                    showToast("Item Updated");
+                }
+            } else {
+                // ADD MODE
+                const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
+                products.unshift({
+                    id: newId,
+                    name: name,
+                    price: price,
+                    desc: desc || "Delicious item",
+                    category: cat,
+                    image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                    inStock: true
+                });
+                showToast("Item Added");
+            }
+            
+            hideAddItemModal();
+            renderVendorMenu();
+            renderHomeProducts(); 
+            renderMenuList();     
+        }
+        
+        function addNewItem() {
+            const name = document.getElementById('new-item-name').value;
+            const price = parseFloat(document.getElementById('new-item-price').value);
+            const desc = document.getElementById('new-item-desc').value;
+            const cat = document.getElementById('new-item-cat').value;
+            
+            if(!name || !price) { showToast("Please fill info"); return; }
+            
+            const newId = products.length + 1;
+            // Add to global products
+            products.unshift({
+                id: newId,
+                name: name,
+                price: price,
+                desc: desc || "Delicious item",
+                category: cat,
+                image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" // Placeholder image
+            });
+            
+            hideAddItemModal();
+            renderVendorMenu();
+            renderHomeProducts(); // Update student view
+            renderMenuList();     // Update student view
+            showToast("Item Added Successfully");
+        }
+
+        // --- STUDENT TRACKING LOGIC ---
+        function updateTrackingUI() {
+            const container = document.getElementById('tracking-orders-list');
+            const activeOrders = globalOrders.filter(o => o.status !== 'Completed');
+            
+            if (activeOrders.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-10">
+                        <div class="bg-gray-100 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-box-open text-3xl text-gray-400"></i>
+                        </div>
+                        <h3 class="text-gray-600 font-bold">No Active Orders</h3>
+                        <p class="text-gray-400 text-xs mt-1">Your active orders will appear here</p>
+                        <button onclick="navigateTo('view-home')" class="mt-4 text-brand text-xs font-bold uppercase">Browse Menu</button>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = activeOrders.map(order => createTrackingCard(order)).join('');
+        }
+
+        function createTrackingCard(order) {
+            const steps = [
+                { s: 'Pending', label: 'Placed', icon: 'receipt' },
+                { s: 'Preparing', label: 'Prep', icon: 'fire-alt' },
+                { s: 'Out for Delivery', label: 'Delivery', icon: 'motorcycle' },
+            ];
+
+            const currentIdx = steps.findIndex(x => x.s === order.status);
+            
+            // Generate progress bar width based on status
+            const progressWidth = currentIdx === 0 ? '15%' : (currentIdx === 1 ? '50%' : '100%');
+            const statusColor = getStatusColor(order.status);
+
+            return `
+            <div class="bg-white p-5 rounded-3xl shadow-sm border border-gray-50 mb-4">
+                <div class="flex justify-between items-center mb-4 border-b border-gray-50 pb-3">
+                    <div>
+                        <span class="text-[10px] text-gray-400 uppercase tracking-wider font-bold">Order ID</span>
+                        <h3 class="font-bold text-gray-800">${order.id}</h3>
+                    </div>
+                    <span class="text-xs px-3 py-1 rounded-full font-bold ${statusColor}">${order.status}</span>
+                </div>
+                
+                <div class="mb-4">
+                     <p class="text-xs text-gray-500 line-clamp-2">${order.items.map(i => `${i.qty}x ${i.name}`).join(', ')}</p>
+                     <p class="text-sm font-bold text-gray-800 mt-1">Total: Rs. ${order.total}</p>
+                </div>
+
+                <!-- Simple Progress Bar -->
+                <div class="relative pt-2">
+                    <div class="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
+                        <div class="h-full bg-brand transition-all duration-500 rounded-full" style="width: ${progressWidth}"></div>
+                    </div>
+                    <div class="flex justify-between mt-2 text-[10px] text-gray-400 font-medium">
+                        <span class="${currentIdx >= 0 ? 'text-brand' : ''}">Placed</span>
+                        <span class="${currentIdx >= 1 ? 'text-brand' : ''}">Preparing</span>
+                        <span class="${currentIdx >= 2 ? 'text-brand' : ''}">Delivery</span>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+
+        // --- CORE RENDER FUNCTIONS ---
+        function renderHomeProducts() {
+            const grid = document.getElementById('home-products-grid');
+            if (grid) grid.innerHTML = products.slice(0, 4).map(product => createProductCard(product)).join('');
+        }
+
+        function renderMenuList() {
+            const list = document.getElementById('menu-list');
+            if (list) list.innerHTML = products.map(product => createMenuItem(product)).join('');
+        }
+
+        function filterMenu(category) {
+            navigateTo('view-menu'); 
+            const list = document.getElementById('menu-list');
+            let filtered = products;
+            if (category !== 'all') filtered = products.filter(p => p.category === category);
+            if (list) list.innerHTML = filtered.map(product => createMenuItem(product)).join('');
+        }
+
+        // --- COMPONENT TEMPLATES ---
+        function createProductCard(product) {
+            // Check stock status
+            const isOutOfStock = product.inStock === false;
+            
+            return `
+                <div class="bg-white p-3 rounded-[20px] shadow-sm flex flex-col hover:shadow-lg transition cursor-pointer ${isOutOfStock ? 'opacity-70 grayscale' : ''}" onclick="${isOutOfStock ? '' : `addToCart(${product.id})`}">
+                    <div class="h-28 rounded-[15px] bg-gray-100 mb-3 overflow-hidden relative">
+                        <img src="${product.image}" class="w-full h-full object-cover">
+                        ${isOutOfStock ? 
+                            `<div class="absolute inset-0 bg-black/40 flex items-center justify-center"><span class="text-white font-bold text-xs border border-white px-2 py-1 rounded">SOLD OUT</span></div>` 
+                            : 
+                            `<div class="absolute bottom-2 right-2 bg-white w-8 h-8 rounded-full flex items-center justify-center shadow-md hover:bg-brand hover:text-white transition" onclick="event.stopPropagation(); addToCart(${product.id})">
+                                <i class="fas fa-plus text-xs"></i>
+                            </div>`
+                        }
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-gray-800 text-sm leading-tight mb-1 truncate">${product.name}</h4>
+                        <p class="text-[10px] text-gray-400 mb-2 truncate">${product.desc}</p>
+                    </div>
+                    <div class="flex justify-between items-center mt-auto">
+                        <span class="font-bold text-brand text-sm">Rs. ${product.price}</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        function createMenuItem(product) {
+            const isOutOfStock = product.inStock === false;
+
+            return `
+                <div class="bg-white p-3 rounded-[20px] shadow-sm flex gap-4 hover:shadow-md transition ${isOutOfStock ? 'opacity-60' : ''}">
+                    <div class="w-20 h-20 rounded-[15px] bg-gray-100 overflow-hidden flex-shrink-0 relative">
+                         <img src="${product.image}" class="w-full h-full object-cover ${isOutOfStock ? 'grayscale' : ''}">
+                    </div>
+                    <div class="flex-1 flex flex-col justify-center">
+                        <h4 class="font-bold text-gray-800 text-sm mb-1">${product.name}</h4>
+                        <p class="text-xs text-gray-400 mb-2 line-clamp-2">${product.desc}</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-brand text-sm">Rs. ${product.price}</span>
+                            ${isOutOfStock ? 
+                                `<span class="text-red-500 text-xs font-bold uppercase">Out of Stock</span>` 
+                                : 
+                                `<button onclick="addToCart(${product.id})" class="bg-red-50 text-brand px-3 py-1 rounded-full text-xs font-bold hover:bg-brand hover:text-white transition">ADD</button>`
+                            }
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- CART & CHECKOUT ---
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            
+            // Stock Guard
+            if(product.inStock === false) {
+                showToast("Item is out of stock");
+                return;
+            }
+
+            const existing = cart.find(item => item.id === productId);
+            if (existing) existing.qty++;
+            else cart.push({ ...product, qty: 1 });
+            updateCartCount();
+            showToast(`${product.name} added`);
+            document.querySelectorAll('#cart-badge-home, #cart-badge-nav').forEach(b => {
+                if(b) { b.classList.remove('hidden'); b.classList.add('animate-bounce'); setTimeout(() => b.classList.remove('animate-bounce'), 1000); }
+            });
+        }
+
+        function updateQty(productId, change) {
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                item.qty += change;
+                if (item.qty <= 0) cart = cart.filter(item => item.id !== productId);
+                renderCart();
+                updateCartCount();
+            }
+        }
+
+        function updateCartCount() {
+            const count = cart.reduce((acc, item) => acc + item.qty, 0);
+            const badges = [document.getElementById('cart-badge-home'), document.getElementById('cart-badge-nav')];
+            const headerCount = document.getElementById('cart-count-header');
+            if(headerCount) headerCount.innerText = `${count} items`;
+            badges.forEach(badge => {
+                if (badge) {
+                    badge.innerText = count;
+                    if(count > 0) badge.classList.remove('hidden');
+                    else badge.classList.add('hidden');
+                }
+            });
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cart-items-container');
+            const checkoutSec = document.getElementById('checkout-section');
+            if (!container) return;
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="flex flex-col items-center justify-center h-full text-gray-400">
+                        <div class="bg-gray-100 p-8 rounded-full mb-6 animate-pulse"><i class="fas fa-shopping-basket text-4xl opacity-30 text-brand"></i></div>
+                        <p class="font-medium text-gray-500">Your cart is currently empty</p>
+                        <button onclick="navigateTo('view-menu')" class="mt-6 px-8 py-3 bg-brand text-white rounded-xl text-sm font-bold shadow-lg shadow-red-900/20 hover:bg-opacity-90 transition transform hover:-translate-y-1">Explore Menu</button>
+                    </div>`;
+                if(checkoutSec) checkoutSec.classList.add('hidden');
+                return;
+            }
+
+            if(checkoutSec) checkoutSec.classList.remove('hidden');
+            let subtotal = 0;
+            const html = cart.map(item => {
+                subtotal += item.price * item.qty;
+                return `
+                    <div class="bg-white p-3 rounded-[20px] mb-4 flex items-center shadow-sm border border-gray-50">
+                        <img src="${item.image}" class="w-16 h-16 rounded-[15px] object-cover mr-4">
+                        <div class="flex-1">
+                            <h4 class="font-bold text-gray-800 text-sm">${item.name}</h4>
+                            <p class="text-brand font-bold text-sm">Rs. ${(item.price * item.qty).toFixed(0)}</p>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <button onclick="updateQty(${item.id}, -1)" class="w-7 h-7 rounded-full bg-gray-100 text-gray-600 flex items-center justify-center text-xs hover:bg-brand hover:text-white transition"><i class="fas fa-minus"></i></button>
+                            <span class="text-sm font-bold w-3 text-center">${item.qty}</span>
+                            <button onclick="updateQty(${item.id}, 1)" class="w-7 h-7 rounded-full bg-gray-100 text-gray-600 flex items-center justify-center text-xs hover:bg-brand hover:text-white transition"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>`;
+            }).join('');
+            container.innerHTML = html;
+            const tax = subtotal * 0.05;
+            document.getElementById('cart-subtotal').innerText = 'Rs. ' + subtotal.toFixed(0);
+            document.getElementById('cart-tax').innerText = 'Rs. ' + tax.toFixed(0);
+            document.getElementById('cart-total').innerText = 'Rs. ' + (subtotal + tax).toFixed(0);
+        }
+
+        function processCheckout() {
+             const btn = document.querySelector('#checkout-section button');
+             btn.innerText = "Processing...";
+             btn.disabled = true;
+
+             setTimeout(() => {
+                 // Create Real Order Object
+                 const newOrder = {
+                     id: '#ORD-' + Math.floor(Math.random() * 1000 + 1000),
+                     items: [...cart],
+                     total: document.getElementById('cart-total').innerText.replace('Rs. ', ''),
+                     status: 'Pending',
+                     timestamp: new Date()
+                 };
+                 
+                 globalOrders.push(newOrder);
+                 
+                 showToast("Order Placed Successfully!");
+                 cart = [];
+                 updateCartCount();
+                 renderCart();
+                 btn.innerText = "Place Order";
+                 btn.disabled = false;
+                 navigateTo('view-tracking');
+             }, 1500);
+        }
+
+        function handleMyOrdersClick() {
+            const activeCount = globalOrders.filter(o => o.status !== 'Completed').length;
+            if(activeCount > 0) navigateTo('view-tracking');
+            else showToast('No active orders');
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            if(toast) {
+                document.getElementById('toast-message').innerText = msg;
+                toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-[-20px]');
+                toast.style.top = "40px";
+                setTimeout(() => {
+                    toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-[-20px]');
+                }, 3000);
+            }
+        }
+    </script>
+</body>
+</html>
